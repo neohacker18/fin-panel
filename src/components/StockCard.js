@@ -34,8 +34,9 @@ const PriceHead=styled.div`
     justify-content: space-between;
     margin: 10px 0px;
     font-size: 2rem;
+    `
+    const Cost=styled.div`
 `
-const Cost=styled.div``
 const Percentage=styled.div`
     color: limegreen;
 `

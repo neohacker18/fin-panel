@@ -3,9 +3,9 @@ import SearchBar from './SearchBar'
 import styled from 'styled-components'
 import DarkMode from './DarkMode'
 import LightMode from './LightMode'
-import Card from './Card'
 import Details from './Details'
 import StockCard from './StockCard'
+import Chart from './Chart'
 
 const Home = () => {
   return (
@@ -15,7 +15,7 @@ const Home = () => {
         <LightMode/>
         <DarkMode/>
       </ModeIcon>
-      <Card/>
+      <Chart/>
       <Details/>
       <StockCard/>
     </Container>

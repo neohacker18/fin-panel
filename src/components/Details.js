@@ -1,17 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
+import { dummyCompanyProfileData } from '../constants/dummyData'
+import DetailLi from './DetailLi'
 
 const Details = () => {
+    
+    const {name,country,currency,exchange,ipo,marketCapitalization,finnhubIndustry} = dummyCompanyProfileData;
   return (
     <Container>
         <DetailCard>
-            <li>Name</li>
-            <li>Country</li>
-            <li>Currency</li>
-            <li>Exchange</li>
-            <li>IPO Date</li>
-            <li>Market Capitalisation</li>
-            <li style={{borderBottom: "none"}}>Industry</li>
+            <li><DetailLi name={name} detail="Name"/></li>
+            <li><DetailLi name={country} detail="Country"/></li>
+            <li><DetailLi name={currency} detail="Currency"/></li>
+            <li><DetailLi name={exchange} detail="Exchange"/></li>
+            <li><DetailLi name={ipo} detail="IPO Date"/></li>
+            <li><DetailLi name={marketCapitalization} detail="Market Capitalization"/></li>
+            <li style={{borderBottom: "none"}}><DetailLi name={finnhubIndustry} detail="Industry"/></li>
         </DetailCard>
     </Container>
   )

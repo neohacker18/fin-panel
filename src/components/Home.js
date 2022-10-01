@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import DarkMode from './DarkMode'
 import LightMode from './LightMode'
 import Card from './Card'
+import Details from './Details'
+import StockCard from './StockCard'
 
 const Home = () => {
   return (
@@ -14,6 +16,8 @@ const Home = () => {
         <DarkMode/>
       </ModeIcon>
       <Card/>
+      <Details/>
+      <StockCard/>
     </Container>
   )
 }

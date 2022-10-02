@@ -51,10 +51,10 @@ const Chart = (props) => {
           assetSymbol,
           resolution,
           startUnix,
-          endUnix,
+          endUnix
         );
         setData(formatData(result));
-        console.log(data);
+        console.log(result);
       } catch (error) {
         setData([]);
         console.log(error);
@@ -62,33 +62,34 @@ const Chart = (props) => {
     };
 
     updateChartData();
-  }, [assetSymbol, filter]);
+  }, [assetSymbol]);
 
   return (
     <>
     <Container>
-      <ul className='flex absolute top-2 right-2 z-40'>
+    <ul className='flex absolute top-2 right-2 z-40'>
         {Object.keys(chartConfig).map(item => (
           <li key={item}>
             <ChartFilter
               text={item}
               active={filter === item}
               onClick={() => setFilter(item)}
-              ></ChartFilter>
+            ></ChartFilter>
           </li>
         ))}
       </ul>
-        <AreaChart data={data}>
+      <ChartBox>
+        <AreaChart width={850} height={450} data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
           <defs>
             <linearGradient id='chartColour' x1='0' y1='0' x2='0' y2='1'>
               <stop
-                offset='5%'
+                offset='25%'
                 stopColor={`rgb(199 210 254)`}
                 stopOpacity={0.8}
                 />
               <stop
                 offset='95%'
-                stopColor={'rgb(199 210 254)'}
+                stopColor={'#0772f5'}
                 stopOpacity={0}
                 />
             </linearGradient>
@@ -108,6 +109,7 @@ const Chart = (props) => {
           <XAxis dataKey={'date'} />
           <YAxis domain={['dataMin', 'dataMax']} />
         </AreaChart>
+      </ChartBox>
     </Container>
     </>
   )
@@ -121,6 +123,11 @@ const Container=styled.div`
   position: absolute;
   top: 150px;
   left: 40px;
+`
+const ChartBox=styled.div`
+  position: absolute;
+  top: 90px;
+  left: 10px;
 `
 
 export default Chart

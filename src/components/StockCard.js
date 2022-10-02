@@ -10,7 +10,6 @@ const StockCard = (props) => {
             try {
                 const result=await fetchQuote(symbol);
                 setQuote(result);
-                console.log(result);
             } catch (error) {
                 setQuote([]);
                 console.log(error);

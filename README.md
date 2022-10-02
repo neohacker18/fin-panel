@@ -15,6 +15,7 @@
         <li>Reduce prop-drilling</li>
         <li>Add more functionalities like Recommendation trends</li>
         <li>Fix chart-filter</li>
+        <li>Add search filter</li>
     </ul>
 </div>
 

@@ -1,13 +1,32 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
+import { fetchQuote } from '../api/asset-api';
 
-const StockCard = () => {
-  return (
+const StockCard = (props) => {
+    const {symbol}=props;
+    const [quote,setQuote ] = useState([])
+    useEffect(() => {
+    const updateStockCard=async()=>{
+            try {
+                const result=await fetchQuote(symbol);
+                setQuote(result);
+                console.log(result);
+            } catch (error) {
+                setQuote([]);
+                console.log(error);
+            }
+            return () => {
+            }
+        }
+        updateStockCard();
+    }, [symbol])
+  
+    return (
     <Container>
-        <Title>GOOG</Title>
+        <Title>{symbol}</Title>
         <PriceHead>
-            <Cost>$</Cost>
-            <Percentage>(%)</Percentage>
+            <Cost>${quote.c}</Cost>
+            <Percentage className={`${quote.dp>=0?`perc-positive`:`perc-negative`}`}>{(quote.dp)}(%)</Percentage>
         </PriceHead>
     </Container>
   )
@@ -38,7 +57,6 @@ const PriceHead=styled.div`
     const Cost=styled.div`
 `
 const Percentage=styled.div`
-    color: limegreen;
 `
 
 export default StockCard

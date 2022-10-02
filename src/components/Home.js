@@ -3,8 +3,6 @@ import SearchBar from './SearchBar'
 import styled from 'styled-components'
 import DarkMode from './DarkMode'
 import LightMode from './LightMode'
-import Details from './Details'
-import StockCard from './StockCard'
 import Chart from './Chart'
 
 const Home = () => {
@@ -16,8 +14,6 @@ const Home = () => {
         <DarkMode/>
       </ModeIcon>
       <Chart/>
-      <Details/>
-      <StockCard/>
     </Container>
   )
 }

@@ -11,57 +11,61 @@ import ChartFilter from './ChartFilter';
 
 import {fetchHistoricalData} from '../api/asset-api'
 
-import ThemeContext from './../context/theme-context';
-import AssetContext from '../context/asset-context';
 
-const Chart = () => {
+const Chart = (props) => {
   const [data,setData]=useState([]);
   const [filter, setFilter] = useState('1Y');  
+  const assetSymbol=props.symbol;
   
-  const [assetSymbol,setAssetSymbol]=useState('FB') ;
-  
-  const formatData=(data)=>{
-    return data.c.map((val,id)=>{
-      return{
-        value:val.toFixed(2),
-        date:convertUnixToDate(data.t[id])
+  const formatData = data => {
+    return data.c.map((item, index) => {
+      return {
+        value: item.toFixed(2),
+        date: convertUnixToDate(data.t[index]),
       };
     });
   };
 
-  useEffect(()=>{
-    const getDateRange=()=>{
-      const {days,weeks,months,years}=chartConfig[filter];
+  useEffect(() => {
+    const getDateRange = () => {
+      const { days, weeks, months, years } = chartConfig[filter];
 
-      const endDate=new Date();
-      const startDate=createDate(endDate,-days,-weeks,-months,-years);
+      const endDate = new Date();
+      const startDate = createDate(endDate, -days, -weeks, -months, -years);
 
-      const startUnix=convertDateToUnix(startDate);
-      const endUnix=convertDateToUnix(endDate);
+      const startUnix = convertDateToUnix(startDate);
+      const endUnix = convertDateToUnix(endDate);
 
       return {
         startUnix,
-        endUnix
+        endUnix,
       };
     };
 
-    const updateChartData = async() => {
-      try{
-        const {startUnix,endUnix}=getDateRange();
-        const resolution=chartConfig[filter].resolution;
+    const updateChartData = async () => {
+      try {
+        const { startUnix, endUnix } = getDateRange();
+        const resolution = chartConfig[filter].resolution;
 
-        const result=await fetchHistoricalData(assetSymbol,resolution,startUnix,endUnix);
+        const result = await fetchHistoricalData(
+          assetSymbol,
+          resolution,
+          startUnix,
+          endUnix,
+        );
         setData(formatData(result));
-      }
-      catch(err){
+        console.log(data);
+      } catch (error) {
         setData([]);
-        console.log(err);
+        console.log(error);
       }
-    }
+    };
+
     updateChartData();
-  },[assetSymbol,filter])
+  }, [assetSymbol, filter]);
 
   return (
+    <>
     <Container>
       <ul className='flex absolute top-2 right-2 z-40'>
         {Object.keys(chartConfig).map(item => (
@@ -70,7 +74,7 @@ const Chart = () => {
               text={item}
               active={filter === item}
               onClick={() => setFilter(item)}
-            ></ChartFilter>
+              ></ChartFilter>
           </li>
         ))}
       </ul>
@@ -81,12 +85,12 @@ const Chart = () => {
                 offset='5%'
                 stopColor={`rgb(199 210 254)`}
                 stopOpacity={0.8}
-              />
+                />
               <stop
                 offset='95%'
                 stopColor={'rgb(199 210 254)'}
                 stopOpacity={0}
-              />
+                />
             </linearGradient>
           </defs>
           <Area
@@ -96,15 +100,16 @@ const Chart = () => {
             fillOpacity={1}
             strokeWidth={0.5}
             fill='url(#chartColour)'
-          />
+            />
           <Tooltip
             contentStyle={{backgroundColor: '#111827' }}
             itemStyle={{color: '#818cf8'}}
-          />
+            />
           <XAxis dataKey={'date'} />
           <YAxis domain={['dataMin', 'dataMax']} />
         </AreaChart>
     </Container>
+    </>
   )
 }
 

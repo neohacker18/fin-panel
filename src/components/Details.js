@@ -1,21 +1,36 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
+import { fetchAssetDetails } from '../api/asset-api'
 import { dummyCompanyProfileData } from '../constants/dummyData'
 import DetailLi from './DetailLi'
 
-const Details = () => {
-    
-    const {name,country,currency,exchange,ipo,marketCapitalization,finnhubIndustry} = dummyCompanyProfileData;
+const Details = (props) => {
+    const {symbol}=props;
+    const [cardDetails,setCardDetails] = useState([])
+    useEffect(() => {
+        const updateStockCard=async()=>{
+            try {
+                const result=await fetchAssetDetails(symbol);
+                setCardDetails(result);
+            } catch (error) {
+                setCardDetails([]);
+                console.log(error);
+            }
+            return () => {
+            }
+        }
+        updateStockCard();
+    }, [symbol])
   return (
     <Container>
         <DetailCard>
-            <li><DetailLi name={name} detail="Name"/></li>
-            <li><DetailLi name={country} detail="Country"/></li>
-            <li><DetailLi name={currency} detail="Currency"/></li>
-            <li><DetailLi name={exchange} detail="Exchange"/></li>
-            <li><DetailLi name={ipo} detail="IPO Date"/></li>
-            <li><DetailLi name={marketCapitalization} detail="Market Capitalization"/></li>
-            <li style={{borderBottom: "none"}}><DetailLi name={finnhubIndustry} detail="Industry"/></li>
+            <li><DetailLi name={cardDetails.name} detail="Name"/></li>
+            <li><DetailLi name={cardDetails.country} detail="Country"/></li>
+            <li><DetailLi name={cardDetails.currency} detail="Currency"/></li>
+            <li><DetailLi name={cardDetails.exchange} detail="Exchange"/></li>
+            <li><DetailLi name={cardDetails.ipo} detail="IPO Date"/></li>
+            <li><DetailLi name={cardDetails.marketCapitalization} detail="Market Capitalization"/></li>
+            <li style={{borderBottom: "none"}}><DetailLi name={cardDetails.finnhubIndustry} detail="Industry"/></li>
         </DetailCard>
     </Container>
   )

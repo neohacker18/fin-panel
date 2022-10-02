@@ -11,6 +11,14 @@ code {
     monospace;
 }
 
+.perc-positive{
+  color: limegreen;
+}
+
+.perc-negative{
+  color: red;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

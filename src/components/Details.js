@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components'
 import { fetchAssetDetails } from '../api/asset-api'
-import { dummyCompanyProfileData } from '../constants/dummyData'
 import DetailLi from './DetailLi'
 
 const Details = (props) => {

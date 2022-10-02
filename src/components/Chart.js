@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext} from 'react'
+import React,{useState,useEffect} from 'react'
 import { AreaChart,Area,Tooltip,XAxis,YAxis } from 'recharts';
 import styled from 'styled-components';
 import {
@@ -62,7 +62,7 @@ const Chart = (props) => {
     };
 
     updateChartData();
-  }, [assetSymbol,filter]);
+  }, [assetSymbol]);
 
   return (
     <>

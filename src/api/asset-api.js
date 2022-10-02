@@ -1,5 +1,4 @@
 const basePath="https://finnhub.io/api/v1";
-console.log(process.env.REACT_APP_API_KEY)
 
 export const searchSymbols=async query=>{
     const url = `${basePath}/search?q=${query}&token=${process.env.REACT_APP_API_KEY}`;

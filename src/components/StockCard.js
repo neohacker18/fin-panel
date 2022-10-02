@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { fetchQuote } from '../api/asset-api';
 
 const StockCard = (props) => {
-    const {symbol}=props;
+    const {symbol,active}=props;
     const [quote,setQuote ] = useState([])
     useEffect(() => {
     const updateStockCard=async()=>{
@@ -24,7 +24,7 @@ const StockCard = (props) => {
     <Container>
         <Title>{symbol}</Title>
         <PriceHead>
-            <Cost>${quote.c}</Cost>
+            <Cost active={active}>${quote.c}</Cost>
             <Percentage className={`${quote.dp>=0?`perc-positive`:`perc-negative`}`}>{(quote.dp)}(%)</Percentage>
         </PriceHead>
     </Container>
@@ -37,7 +37,6 @@ const Container=styled.div`
     position: absolute;
     right: 50px;
     top: 150px;
-    color: #E7E6E7;
     font-size: 1.1rem;
     border: 1px solid #3c3c3c;
     border-radius: 2%;
@@ -54,6 +53,7 @@ const PriceHead=styled.div`
     font-size: 2rem;
     `
     const Cost=styled.div`
+    color: ${props=>props.active==='dark'?'#E7E6E7':'black'};
 `
 const Percentage=styled.div`
 `

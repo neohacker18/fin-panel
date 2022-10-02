@@ -14,7 +14,7 @@ import {fetchHistoricalData} from '../api/asset-api'
 
 const Chart = (props) => {
   const [data,setData]=useState([]);
-  const [filter, setFilter] = useState('1Y');  
+  const [filter, setFilter] = useState('1M');  
   const assetSymbol=props.symbol;
   
   const formatData = data => {
@@ -54,7 +54,7 @@ const Chart = (props) => {
           endUnix
         );
         setData(formatData(result));
-        console.log(result);
+        console.log(filter);
       } catch (error) {
         setData([]);
         console.log(error);
@@ -62,7 +62,7 @@ const Chart = (props) => {
     };
 
     updateChartData();
-  }, [assetSymbol]);
+  }, [assetSymbol,filter]);
 
   return (
     <>
@@ -72,8 +72,8 @@ const Chart = (props) => {
           <li key={item}>
             <ChartFilter
               text={item}
+              onClick={() =>{setFilter(item)}}
               active={filter === item}
-              onClick={() => setFilter(item)}
             ></ChartFilter>
           </li>
         ))}

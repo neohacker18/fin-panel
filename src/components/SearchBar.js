@@ -4,7 +4,8 @@ import Chart from './Chart';
 import StockCard from './StockCard'
 import Details from './Details'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
+    const {active} =props;
     const [symbol, setSymbol] = useState('');
     const [typed,setTyped]=useState('');
   return (
@@ -28,9 +29,9 @@ const SearchBar = () => {
             </button>
         </form>
     </Container>
-    <Chart symbol={symbol}/>
-    <StockCard symbol={symbol}/>
-    <Details symbol={symbol}/>
+    <Chart symbol={symbol} active={active}/>
+    <StockCard symbol={symbol} active={active}/>
+    <Details symbol={symbol} active={active}/>
     </>
   )
 }

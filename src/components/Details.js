@@ -5,7 +5,7 @@ import { dummyCompanyProfileData } from '../constants/dummyData'
 import DetailLi from './DetailLi'
 
 const Details = (props) => {
-    const {symbol}=props;
+    const {symbol,active}=props;
     const [cardDetails,setCardDetails] = useState([])
     useEffect(() => {
         const updateStockCard=async()=>{
@@ -22,7 +22,7 @@ const Details = (props) => {
         updateStockCard();
     }, [symbol])
   return (
-    <Container>
+    <Container active={active}>
         <DetailCard>
             <li><DetailLi name={cardDetails.name} detail="Name"/></li>
             <li><DetailLi name={cardDetails.country} detail="Country"/></li>
@@ -42,7 +42,7 @@ const Container=styled.div`
     position: absolute;
     right: 50px;
     top: 330px;
-    color: #d7d7d9;
+    color: ${props=>props.active==='dark'?'#d7d7d9':'black'};
     font-size: 1.1rem;
     border: 1px solid #3c3c3c;
     border-radius: 2%;

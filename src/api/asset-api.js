@@ -15,7 +15,7 @@ export const searchSymbols=async query=>{
 }
 
 export const fetchAssetDetails=async assetSymbol=>{
-    const url = `${basePath}/stock/profile2?symbol=${assetSymbol}&token=${process.env.REACT_APP_API_KEY}`;
+    const url = `${basePath}/stock/profile2?symbol=${assetSymbol}&token=${REACT_APP_API_KEY}`;
     const response = await fetch(url);
 
     if(!response.ok)
@@ -27,7 +27,7 @@ export const fetchAssetDetails=async assetSymbol=>{
 }
 
 export const fetchQuote=async assetSymbol=>{
-    const url = `${basePath}/quote?symbol=${assetSymbol}&token=${process.env.REACT_APP_API_KEY}`;
+    const url = `${basePath}/quote?symbol=${assetSymbol}&token=${REACT_APP_API_KEY}`;
     const response = await fetch(url);
 
     if (!response.ok) 
